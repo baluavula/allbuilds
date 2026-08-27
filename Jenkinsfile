@@ -67,7 +67,8 @@ pipeline {
         echo "image deployed to  stage completed: "
       }
     }
-    post {
+  }
+  post {
         // always  will send a  message  everyting  whether  it is  success/failure/any event happend
       always {
             echo "always  block executed: "
@@ -79,6 +80,5 @@ pipeline {
           echo "success block executed: "
         }
       }
-  }
 }
 
