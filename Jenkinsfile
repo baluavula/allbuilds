@@ -1,5 +1,8 @@
 pipeline {
   agent any
+  options {
+    buildDiscarder(logRotator(numToKeepStr: '1'))
+  }
   parameters {
     string(name: 'Employee_name',
            defaultValue: 'Mr. Koti',
@@ -14,9 +17,7 @@ pipeline {
   stages {
     stage ("build"){
       when {
-        expression {
-               ['Build','Sonar','Nexus'].contains(params.Environments)
-         }
+        expression { params.Environments == 'Build' }
         }
       steps {
           echo "**********Build stage commpleted  successfully: "
