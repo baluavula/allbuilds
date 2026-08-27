@@ -18,8 +18,6 @@ pipeline {
                ['Build','Sonar','Nexus'].contains(params.Environments)
          }
         }
-          
-        } 
       steps {
           echo "**********Build stage commpleted  successfully: "
       }
