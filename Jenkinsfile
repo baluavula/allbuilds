@@ -28,7 +28,7 @@ pipeline {
     }
     stage ("test"){
       when {
-        choice "Stages"
+        APP_TEST = "testing"
       }
       steps {
         echo "testing the application is ${env.APP_TEST}"
