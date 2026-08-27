@@ -14,7 +14,7 @@ pipeline {
   stages {
     stage ("build"){
       when {
-          params.Environments == 'Build'
+          expression {params.Environments == 'Build' }
         } 
       steps {
           echo "**********Build stage commpleted  successfully: "
@@ -22,7 +22,7 @@ pipeline {
     }
     stage ("Sonar"){
       when {
-        params.Environments == 'Sonar'
+        expression { params.Environments == 'Sonar' }
       }
       steps {
         echo "Scan stage  is  completed"
@@ -30,7 +30,7 @@ pipeline {
     }
     stage ('Nexus'){
       when {
-        params.Environments == 'Nexus'
+        expression { params.Environments == 'Nexus' }
       }
       steps {
         echo "Nexus stages passed successfully: "
@@ -38,7 +38,7 @@ pipeline {
     }
     stage ('Dockerfile'){
       when {
-        params.Environments = 'Dockerfile'
+        expression { params.Environments == 'Dockerfile' }
       }
       steps{
         echo "Image created  successfully:"
@@ -46,7 +46,7 @@ pipeline {
     }
     stage('DeployToDev'){
       when {
-        params.Environments == 'DeploytoDev'
+        expression { params.Environments == 'DeploytoDev' }
       }
       steps {
         echo "app build on dev completed  successfully: "
@@ -54,7 +54,7 @@ pipeline {
     }
     stage('DeploytoStage'){
       when {
-        params.Environments == 'DeploytoStage'
+        expression { params.Environments == 'DeploytoStage' }
       }
       steps {
         echo "image deployed to  stage completed: "
