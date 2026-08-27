@@ -14,7 +14,7 @@ pipeline {
   stages {
     stage ("build"){
       when {
-        allOf {
+        anyOf {
           expression { params.Environments == 'Build' }
           expression { params.Environments == 'Sonar' }
         }
