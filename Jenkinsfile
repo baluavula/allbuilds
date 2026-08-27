@@ -18,12 +18,21 @@ pipeline {
           choices: ['Build', 'Sonar', 'Nexus', 'Dockerfile', 'DeploytoDev', 'DeploytoStage'], 
           description: 'Pick the stage as u wish: ')
   }
+  environment{
+    GITHUB_CREDS = credentials('github_creds')
+    GITHUB_ACCOUNT = 'baluavaula'
+    GITHUB_REPO = 'login-ms'
+    GITHUB_TAG = 'v1'
+  }
   stages {
     stage ("build"){
       when {
         expression { params.Environments == 'Build' }
         }
       steps {
+        sh 'docker login -u ${env.GITHUB_CREDS_USR} -p ${env.GITHUB_CREDS_PSW}'
+        sh 'docker build -t . ${env.GITHUB_ACCOUNT}/${env.GITHUB_REPO}/:${env.GITHUB_TAG}'
+        sh 'docker push ${env.GITHUB_ACCOUNT}/${env.GITHUB_REPO}/:${env.GITHUB_TAG}'
           echo "**********Build stage commpleted  successfully: "
       }
     }
