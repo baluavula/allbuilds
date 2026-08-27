@@ -14,9 +14,9 @@ pipeline {
   stages {
     stage ("build"){
       when {
-        allOf {
-          expression { params.Environments == 'Build' }
-          expression { params.Environments == 'Sonar' }
+        expression {
+               ['Build','Sonar','Nexus'].contains(params.Environments)
+         }
         }
           
         } 
