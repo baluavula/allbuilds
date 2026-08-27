@@ -1,39 +1,64 @@
 pipeline {
   agent any
   parameters {
-    string(name: 'Person_name',
+    string(name: 'Employee_name',
            defaultValue: 'Mr. Koti',
-           description: 'Who should I say hello to?')
+           description: 'Enter the  employee to identify you?')
     booleanParam(name: 'TOGGLE', 
                 defaultValue: false,
                 description: 'Toggle this value')
-    choice(name: 'Build', 
-          choices: ['Development', 'Stage', 'Production'], 
-          description: 'Pick environemnt  Carefully')
-    choice(name: 'Stages', 
-          choices: ['sonar', 'nexus', 'Dockerfile'], 
-          description: 'Pick environemnt  Carefully')
-  }
-  environment {
-    APP_BUILD = "development"
-    APP_TEST = "testing"
+    choice(name: 'Environments', 
+          choices: ['Build', 'Sonar', 'Nexus', 'Dockerfile', 'DeploytoDev', 'DeploytoStage'], 
+          description: 'Pick the stage as u wish: ')
   }
   stages {
     stage ("build"){
+      when {
+          params.Environments = 'Build'
+        } 
       steps {
-        echo "welcome to the jenkins ${params.Person_name}"
-        echo "choose the environment name is ${params.Build}"
-        echo "choose the scan for application is ${params.Stages}"
+          echo "**********Build stage commpleted  successfully: "
       }
     }
-    stage ("test"){
+    stage ("Sonar"){
       when {
-        APP_TEST = "testing"
+        params.Environments = 'Sonar'
       }
       steps {
-        echo "testing the application is ${env.APP_TEST}"
+        echo "Scan stage  is  completed"
       }
-
+    }
+    stage ('Nexus'){
+      when {
+        params.Environments = 'Nexus'
+      }
+      steps {
+        echo "Nexus stages passed successfully: "
+      }
+    }
+    stage ('Dockerfile'){
+      when {
+        params.Environments = 'Dockerfile'
+      }
+      steps{
+        echo "Image created  successfully:"
+      }
+    }
+    stage('DeployToDev'){
+      when {
+        params.Environments = 'DeploytoDev'
+      }
+      steps {
+        echo "app build on dev completed  successfully: "
+      }
+    }
+    stage('DeploytoStage'){
+      when {
+        params.Environments = 'DeploytoStage'
+      }
+      steps {
+        echo "image deployed to  stage completed: "
+      }
     }
   }
 }
