@@ -1,7 +1,7 @@
 pipeline {
   agent any
   options {
-    buildDiscarder(logRotator(numToKeepStr: '1'))
+    buildDiscarder(logRotator(numToKeepStr: '2'))
   }
   parameters {
     string(name: 'Employee_name',
