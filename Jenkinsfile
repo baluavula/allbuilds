@@ -1,7 +1,5 @@
 pipeline {
-  agent {
-    label "app-slave"
-  }
+  agent any
   environment {
     APP_BUILD = "development"
     APP_TEST = "testing"
