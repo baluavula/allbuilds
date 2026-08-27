@@ -14,13 +14,12 @@ pipeline {
   stages {
     stage ("build"){
       when {
-        anyOf {
+        allOf {
           expression { params.Environments == 'Build' }
           expression { params.Environments == 'Sonar' }
         }
           
         } 
-
       steps {
           echo "**********Build stage commpleted  successfully: "
       }
