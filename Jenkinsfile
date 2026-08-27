@@ -1,6 +1,6 @@
 pipeline {
   agent any
-  parameters  {
+  parameters {
     string(name: 'Person_name',
            defaultValue: 'Mr. Koti',
            description: 'Who should I say hello to?')
@@ -13,6 +13,7 @@ pipeline {
     choice(name: 'Stages', 
           choices: ['sonar', 'nexus', 'Dockerfile'], 
           description: 'Pick environemnt  Carefully')
+  }
   environment {
     APP_BUILD = "development"
     APP_TEST = "testing"
