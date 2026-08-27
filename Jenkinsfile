@@ -1,7 +1,7 @@
 pipeline {
   agent any
   options {
-    buildDiscarder(logRotator(numToKeepStr: '2' // no of  builds  need to present
+    buildDiscarder(logRotator(numToKeepStr: '2', // no of  builds  need to present
                    daysToKeepStr: '30', // number of days  builds need to present
                    artifactNumToKeepStr: '5', // number od artifacts  need to present
                    artifactDaysToKeepStr: '15' // number of artfact days to keep as a backup
